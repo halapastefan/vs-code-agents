@@ -4,19 +4,6 @@ Collection of VS Code agent role definitions used in the workspace `vs-code-agen
 
 This repository contains a set of agent instruction files (`*.agent.md`) that define responsibilities, handoffs, and workflows for a multi-agent system.
 
-Files:
-- analyst.agent.md
-- architect.agent.md
-- critic.agent.md
-- devops.agent.md
-- implementer.agent.md
-- memory.agent.md
-- pi.agent.md
-- planner.agent.md
-- qa.agent.md
-- retrospective.agent.md
-- roadmap.agent.md
-- security.agent.md
-- uat.agent.md
+All agent specification files live under the `vs-code-agents/` folder. For a conceptual overview of the workflow and guidance on when to use each agent, see [USING-AGENTS.md](USING-AGENTS.md).
 
 License: MIT
