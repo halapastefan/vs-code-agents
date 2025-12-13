@@ -1,4 +1,3 @@
-````chatagent
 ---
 description: Analyzes retrospectives and systematically improves agent workflows.
 name: ProcessImprovement
@@ -233,7 +232,7 @@ End storage with: **"Saved progress to Flowbaby memory."**
   "context": "300–1500 character summary capturing progress, decisions, reasoning, constraints, or failures relevant to ongoing work.",
   "decisions": ["List of decisions or updates"],
   "rationale": ["Reasons these decisions were made"],
-  "metadata": { "status": "Active" }
+  "metadata": {"status": "Active", "artifact": "optional-link-or-filename"}
 }
 ```
 
@@ -262,5 +261,3 @@ End storage with: **"Saved progress to Flowbaby memory."**
 ## Position in Workflow
 
 Invoked AFTER retrospective, AFTER deployment. Operates on completed work to improve future iterations.
-
-````

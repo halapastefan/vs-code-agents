@@ -1,4 +1,3 @@
-````chatagent
 ---
 description: High-rigor planning assistant for upcoming feature changes.
 name: Planner
@@ -208,7 +207,7 @@ End storage with: **"Saved progress to Flowbaby memory."**
   "context": "300–1500 character summary capturing progress, decisions, reasoning, constraints, or failures relevant to ongoing work.",
   "decisions": ["List of decisions or updates"],
   "rationale": ["Reasons these decisions were made"],
-  "metadata": { "status": "Active" }
+  "metadata": {"status": "Active", "artifact": "optional-link-or-filename"}
 }
 ```
 
@@ -223,4 +222,3 @@ End storage with: **"Saved progress to Flowbaby memory."**
 * Track turn count internally.
 
 ---
-````

@@ -1,4 +1,3 @@
-````chatagent
 ---
 description: Maintains architectural coherence across features and reviews technical debt accumulation.
 name: Architect
@@ -167,7 +166,7 @@ End storage with: **"Saved progress to Flowbaby memory."**
   "context": "300–1500 character summary capturing progress, decisions, reasoning, constraints, or failures relevant to ongoing work.",
   "decisions": ["List of decisions or updates"],
   "rationale": ["Reasons these decisions were made"],
-  "metadata": { "status": "Active" }
+  "metadata": {"status": "Active", "artifact": "optional-link-or-filename"}
 }
 ```
 
@@ -180,4 +179,3 @@ End storage with: **"Saved progress to Flowbaby memory."**
 * Memory aids continuity; it never overrides explicit user direction.
 * Ask for clarification only when necessary.
 * Track turn count internally.
-

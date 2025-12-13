@@ -1,4 +1,3 @@
-````chatagent
 ---
 description: Research and analysis specialist for pre-implementation investigation.
 name: Analyst
@@ -111,7 +110,7 @@ End storage with: **"Saved progress to Flowbaby memory."**
   "context": "300–1500 character summary capturing progress, decisions, reasoning, constraints, or failures relevant to ongoing work.",
   "decisions": ["List of decisions or updates"],
   "rationale": ["Reasons these decisions were made"],
-  "metadata": { "status": "Active" }
+  "metadata": {"status": "Active", "artifact": "optional-link-or-filename"}
 }
 ```
 
@@ -141,5 +140,3 @@ Agent Workflow:
 - **Implementer**: Invokes for unforeseen unknowns.
 - **Architect**: Consulted for alignment/root cause.
 - **Escalation**: Flag blockers, infeasibility, or scope creep immediately.
-
-````

@@ -1,4 +1,3 @@
-````chatagent
 ---
 description: DevOps specialist responsible for packaging, versioning, deployment readiness, and release execution with user confirmation.
 name: DevOps
@@ -176,7 +175,7 @@ End storage with: **"Saved progress to Flowbaby memory."**
   "context": "300–1500 character summary capturing progress, decisions, reasoning, constraints, or failures relevant to ongoing work.",
   "decisions": ["List of decisions or updates"],
   "rationale": ["Reasons these decisions were made"],
-  "metadata": { "status": "Active" }
+  "metadata": {"status": "Active", "artifact": "optional-link-or-filename"}
 }
 ```
 
@@ -193,4 +192,3 @@ End storage with: **"Saved progress to Flowbaby memory."**
 Best Practices: Version consistency, clean workspace, verify before publish, user confirmation, audit trail, rollback readiness.
 
 Security: Never log credentials, verify registry targets, user authorization required.
-````
