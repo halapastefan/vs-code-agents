@@ -244,6 +244,8 @@ Contributions welcome! Areas of interest:
 - **Memory patterns**: Better retrieval/storage strategies
 - **Documentation**: Examples, tutorials, troubleshooting
 
+This repository also runs an automatic **Markdown lint** check in GitHub Actions on pushes and pull requests that touch `.md` files. The workflow uses `markdownlint-cli2` with a shared configuration, and helps catch issues like missing fenced code block languages (MD040) early in review. This lint workflow was proposed based on feedback and review from @rjmurillo.
+
 ---
 
 ## Requirements
