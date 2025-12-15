@@ -41,6 +41,10 @@ Process:
 4. Document `NNN-plan-name-analysis.md`: Changelog, Value Statement, Objective, Context, Root Cause, Methodology, Findings (fact vs hypothesis), Recommendations, Open Questions.
 5. Verify logic. Handoff to Planner.
 
+Subagent Behavior:
+- When invoked as a subagent by Planner or Implementer, follow the same mission and constraints but limit scope strictly to the questions and files provided by the calling agent.
+- Do not expand scope or change plan/implementation direction without handing findings back to the calling agent for decision-making.
+
 Document Naming: `NNN-plan-name-analysis.md` (or `NNN-topic-analysis.md` for standalone)
 
 # Unified Memory Contract (Role-Agnostic)

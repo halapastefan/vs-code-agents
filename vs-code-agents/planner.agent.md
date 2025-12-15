@@ -123,6 +123,7 @@ Every plan MUST include final milestone for updating version artifacts to match 
 ## Agent Workflow
 
 - **Invoke analyst when**: Unknown APIs, unverified assumptions, comparative analysis needed. Analyst creates matching docs in `analysis/` (e.g., `003-fix-workspace-analysis.md`).
+- **Use subagents when available**: When VS Code subagents are enabled, you may invoke Analyst and Implementer as subagents for focused, context-isolated work (e.g., limited experiments or clarifications) while keeping ownership of the overall plan.
 - **Handoff to critic (REQUIRED)**: ALWAYS hand off after completing plan. Critic reviews before implementation.
 - **Handoff to implementer**: After critic approval, implementer executes plan.
 - **Reference Analysis**: Plans may reference analysis docs.

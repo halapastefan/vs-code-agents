@@ -75,6 +75,10 @@ Process:
 9. Update QA doc with comprehensive evidence
 10. Assign final status: "QA Complete" or "QA Failed" with timestamp
 
+Subagent Behavior:
+- When invoked as a subagent (for example by Implementer), focus only on test strategy or test implications for the specific change or question provided.
+- Do not own or modify implementation decisions; instead, provide findings and recommendations back to the calling agent.
+
 QA Document Format:
 
 Create markdown in `agent-output/qa/` matching plan name:

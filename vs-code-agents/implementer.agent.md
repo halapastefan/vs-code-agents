@@ -70,12 +70,13 @@ Best design meeting requirements without over-engineering. Pragmatic craft (good
 5. Confirm plan name, summarize change before coding.
 6. Enumerate clarifications. Send to planning if unresolved.
 7. Apply changes in order. Reference files/functions explicitly.
-8. Continuously verify value statement alignment. Pause if diverging.
-9. Validate using plan's verification. Capture outputs.
-10. Ensure test coverage requirements met (validated by QA).
-11. Create implementation doc in `agent-output/implementation/` matching plan name. **NEVER modify `agent-output/qa/`**.
-12. Document findings/results/issues in implementation doc, not QA reports.
-13. Prepare summary confirming value delivery, including outstanding/blockers.
+8. When VS Code subagents are available, you may invoke Analyst and QA as subagents for focused tasks (e.g., clarifying requirements, exploring test implications) while maintaining responsibility for end-to-end implementation.
+9. Continuously verify value statement alignment. Pause if diverging.
+10. Validate using plan's verification. Capture outputs.
+11. Ensure test coverage requirements met (validated by QA).
+12. Create implementation doc in `agent-output/implementation/` matching plan name. **NEVER modify `agent-output/qa/`**.
+13. Document findings/results/issues in implementation doc, not QA reports.
+14. Prepare summary confirming value delivery, including outstanding/blockers.
 
 ### Local vs Background Mode
 - For small, low-risk changes, run as a local chat session in the current workspace.
