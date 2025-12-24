@@ -51,6 +51,33 @@ Subagent Behavior:
 
 Document Naming: `NNN-plan-name-analysis.md` (or `NNN-topic-analysis.md` for standalone)
 
+---
+
+# Document Lifecycle
+
+**MANDATORY**: Load `document-lifecycle` skill. You are an **originating agent**.
+
+**Creating new documents**:
+1. Read `agent-output/.next-id` (create with value `1` if missing)
+2. Use that value as your document ID
+3. Increment and write back: `echo $((ID + 1)) > agent-output/.next-id`
+
+**Document header** (required for all new documents):
+```yaml
+---
+ID: [next-id value]
+Origin: [same as ID]
+UUID: [8-char random hex, e.g., a3f7c2b1]
+Status: Active
+---
+```
+
+**Self-check on start**: Before starting work, scan `agent-output/analysis/` for docs with terminal Status (Committed, Released, Abandoned, Deferred, Superseded) outside `closed/`. Move them to `closed/` first.
+
+**Closure**: Planner closes your analysis doc when creating a plan from it.
+
+---
+
 # Memory Contract
 
 **MANDATORY**: Load `memory-contract` skill at session start. Memory is core to your reasoning.
@@ -65,3 +92,4 @@ Document Naming: `NNN-plan-name-analysis.md` (or `NNN-topic-analysis.md` for sta
 - Store: `#flowbabyStoreSummary { "topic": "3-7 words", "context": "what/why", "decisions": [...] }`
 
 Full contract details: `memory-contract` skill
+

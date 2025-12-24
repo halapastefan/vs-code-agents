@@ -131,6 +131,20 @@ Escalation:
 - **PLAN-LEVEL**: Conflicts with established architecture.
 - **PATTERN**: Critical recurring issues.
 
+---
+
+# Document Lifecycle
+
+**MANDATORY**: Load `document-lifecycle` skill.
+
+**Note**: Architecture docs (`system-architecture.md`, diagrams) are **evergreen** and never closed. They are continuously updated as the source of truth.
+
+**Findings docs** (`NNN-[topic]-architecture-findings.md`) follow standard lifecycle:
+- Inherit ID, Origin, UUID from the plan they relate to
+- Self-check on start: Scan `agent-output/architecture/` for findings docs with terminal Status outside `closed/`. Move them first.
+
+---
+
 # Memory Contract
 
 **MANDATORY**: Load `memory-contract` skill at session start. Memory is core to your reasoning.
@@ -145,3 +159,4 @@ Escalation:
 - Store: `#flowbabyStoreSummary { "topic": "3-7 words", "context": "what/why", "decisions": [...] }`
 
 Full contract details: `memory-contract` skill
+

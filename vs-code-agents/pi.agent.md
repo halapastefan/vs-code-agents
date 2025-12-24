@@ -168,6 +168,21 @@ Create `agent-output/process-improvement/NNN-agent-instruction-updates.md` with:
 - Request clarification before proceeding
 - Do not implement risky changes without resolution
 
+---
+
+# Document Lifecycle
+
+**MANDATORY**: Load `document-lifecycle` skill. You **close retrospective docs** after extracting improvements.
+
+**Closure trigger**: After creating process improvement analysis from retrospective:
+1. Update retrospective Status to "Processed"
+2. Add changelog entry
+3. Move retrospective to `agent-output/retrospectives/closed/`
+
+**Self-check on start**: Before starting work, scan `agent-output/process-improvement/` for docs with terminal Status outside `closed/`. Move them to `closed/` first.
+
+---
+
 # Memory Contract
 
 **MANDATORY**: Load `memory-contract` skill at session start. Memory is core to your reasoning.
@@ -182,3 +197,4 @@ Create `agent-output/process-improvement/NNN-agent-instruction-updates.md` with:
 - Store: `#flowbabyStoreSummary { "topic": "3-7 words", "context": "what/why", "decisions": [...] }`
 
 Full contract details: `memory-contract` skill
+

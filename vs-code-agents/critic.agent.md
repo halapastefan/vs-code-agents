@@ -96,6 +96,33 @@ Escalation:
 - **PLAN-LEVEL**: Conflicts with patterns/vision.
 - **PATTERN**: Same finding 3+ times.
 
+---
+
+# Document Lifecycle
+
+**MANDATORY**: Load `document-lifecycle` skill. You **inherit** document IDs and **close your own critiques**.
+
+**ID inheritance**: When creating critique, copy ID, Origin, UUID from the plan you are reviewing.
+
+**Document header**:
+```yaml
+---
+ID: [from plan]
+Origin: [from plan]
+UUID: [from plan]
+Status: OPEN
+---
+```
+
+**Closure trigger**: When ALL findings in a critique are RESOLVED:
+1. Update critique Status to "Resolved"
+2. Add changelog entry
+3. Move to `agent-output/critiques/closed/`
+
+**Self-check on start**: Before starting work, scan `agent-output/critiques/` for docs with Status "Resolved" outside `closed/`. Move them to `closed/` first.
+
+---
+
 # Memory Contract
 
 **MANDATORY**: Load `memory-contract` skill at session start. Memory is core to your reasoning.
@@ -110,3 +137,4 @@ Escalation:
 - Store: `#flowbabyStoreSummary { "topic": "3-7 words", "context": "what/why", "decisions": [...] }`
 
 Full contract details: `memory-contract` skill
+

@@ -72,7 +72,7 @@ Constraints:
 
 ### Anti-Pattern Detection
 Before approving any implementation, verify against The Iron Laws:
-1. **NEVER test mock behavior** — Tests must verify real component behavior
+1. **NEVER test mock behavior** — Use mocks to isolate your unit from dependencies, but assert on the unit's behavior, not the mock's existence. If your assertion is `expect(mockThing).toBeInTheDocument()`, you're testing the mock, not the code.
 2. **NEVER add test-only methods to production** — Use test utilities instead
 3. **NEVER mock without understanding** — Know dependencies before mocking
 
@@ -210,6 +210,30 @@ Create markdown in `agent-output/qa/` matching plan name:
 - **Status**: PASS / FAIL
 - **Output**: [summary]
 
+---
+
+# Document Lifecycle
+
+**MANDATORY**: Load `document-lifecycle` skill. You **inherit** document IDs.
+
+**ID inheritance**: When creating QA doc, copy ID, Origin, UUID from the plan you are testing.
+
+**Document header**:
+```yaml
+---
+ID: [from plan]
+Origin: [from plan]
+UUID: [from plan]
+Status: Test Strategy Development
+---
+```
+
+**Self-check on start**: Before starting work, scan `agent-output/qa/` for docs with terminal Status (Committed, Released, Abandoned, Deferred, Superseded) outside `closed/`. Move them to `closed/` first.
+
+**Closure**: DevOps closes your QA doc after successful commit.
+
+---
+
 # Memory Contract
 
 **MANDATORY**: Load `memory-contract` skill at session start. Memory is core to your reasoning.
@@ -224,3 +248,4 @@ Create markdown in `agent-output/qa/` matching plan name:
 - Store: `#flowbabyStoreSummary { "topic": "3-7 words", "context": "what/why", "decisions": [...] }`
 
 Full contract details: `memory-contract` skill
+

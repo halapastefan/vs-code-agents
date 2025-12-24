@@ -147,6 +147,28 @@ So that [business value/benefit].
 |---------|------|----------------|--------|
 | v0.X.X | YYYY-MM-DD | [Plan IDs] | Released |
 
+---
+
+# Document Lifecycle
+
+**MANDATORY**: Load `document-lifecycle` skill. You own the **periodic orphan sweep**.
+
+**Orphan sweep** (run when reviewing roadmap or at session start):
+1. Scan ALL `agent-output/*/` directories (excluding `closed/`)
+2. Identify any document with terminal Status (Committed, Released, Abandoned, Deferred, Superseded) NOT in `closed/`
+3. Report orphans to user
+4. Move to respective `closed/` folders
+
+**Report format**:
+```
+Found [N] orphaned documents with terminal status outside closed/:
+- planning/075-feature.md (Status: Released)
+- qa/072-bugfix.md (Status: Committed)
+Moved to respective closed/ folders.
+```
+
+---
+
 # Memory Contract
 
 **MANDATORY**: Load `memory-contract` skill at session start. Memory is core to your reasoning.
@@ -161,3 +183,4 @@ So that [business value/benefit].
 - Store: `#flowbabyStoreSummary { "topic": "3-7 words", "context": "what/why", "decisions": [...] }`
 
 Full contract details: `memory-contract` skill
+

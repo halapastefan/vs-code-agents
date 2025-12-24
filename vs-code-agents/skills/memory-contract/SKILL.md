@@ -72,6 +72,17 @@ Store at **value boundaries**—when you've created something worth preserving. 
 - Duplicate information already in memory
 - Raw outputs without reasoning (store the *why*, not just the *what*)
 
+### Storage Format
+
+Structure summaries for downstream graph extraction:
+
+- **Use stable identifiers** when known: plan IDs (e.g., "Plan 070"), analysis IDs, workspace-relative file paths, semver versions. If you don't know an identifier, omit it—don't invent.
+- **Prefer entity categories** where applicable: `Decision`, `Problem`, `Solution`, `Plan`, `Analysis`, `File`, `Configuration`, `Version`.
+- **Name things consistently.** Use the same canonical name for an artifact across all turns—don't rename mid-conversation.
+- **Be concrete.** Mention specific file paths, setting names, and versions rather than vague references.
+- **Separate fields clearly.** Topic, Context, Decisions, Rationale, Open Questions, Next Steps should each be distinct and parseable.
+- **Avoid conversational fluff.** Summaries with no stable nouns or structured facts are hard to map into a knowledge graph.
+
 **Fallback minimum:** If you haven't stored in 5 turns, store now regardless.
 
 **Always end storage with:** "Saved progress to Flowbaby memory."

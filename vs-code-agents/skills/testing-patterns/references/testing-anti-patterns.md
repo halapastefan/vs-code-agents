@@ -14,6 +14,9 @@ Tests must verify real behavior, not mock behavior. Mocks are a means to isolate
 
 ```
 1. NEVER test mock behavior
+   Use mocks to isolate your unit from dependencies, but assert on the unit's behavior, 
+   not the mock's existence. If your assertion is `expect(mockThing).toBeInTheDocument()`, 
+   you're testing the mock, not the code.
 2. NEVER add test-only methods to production classes
 3. NEVER mock without understanding dependencies
 ```

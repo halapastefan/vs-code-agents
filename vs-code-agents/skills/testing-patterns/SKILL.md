@@ -238,7 +238,7 @@ spy_logger = Mock(wraps=real_logger)
 
 ### The Iron Laws of Mocking
 
-1. **NEVER test mock behavior** — Test real component, not that mock exists
+1. **NEVER test mock behavior** — Use mocks to isolate your unit from dependencies, but assert on the unit's behavior, not the mock's existence. If your assertion is `expect(mockThing).toBeInTheDocument()`, you're testing the mock, not the code.
 2. **NEVER mock without understanding** — Know side effects before isolating
 3. **NEVER create incomplete mocks** — Mirror real API structure completely
 

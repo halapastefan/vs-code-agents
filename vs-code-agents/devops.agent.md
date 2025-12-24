@@ -78,9 +78,13 @@ Deployment Workflow:
    UAT Approved: [date]
    ```
 7. **Do NOT push**. Changes stay local until release is approved.
-8. Update plan status to "Committed for Release [X.Y.Z]".
-9. Report to Roadmap agent (handoff): Plan committed, release tracker needs update.
-10. Inform user: "[Plan ID] committed locally for release [X.Y.Z]. [N] of [M] plans committed for this release."
+8. **Close committed documents** (per `document-lifecycle` skill):
+   - Update Status to "Committed" on: plan, implementation, qa, uat docs
+   - Move each to their respective `agent-output/<domain>/closed/` folders
+   - Log: "Closed documents for Plan [ID]: planning, implementation, qa, uat moved to closed/"
+9. Update plan status to "Committed for Release [X.Y.Z]".
+10. Report to Roadmap agent (handoff): Plan committed, release tracker needs update.
+11. Inform user: "[Plan ID] committed locally for release [X.Y.Z]. [N] of [M] plans committed for this release."
 
 ---
 
@@ -153,6 +157,27 @@ Escalation:
 - **PLAN-LEVEL**: User declines release.
 - **PATTERN**: Packaging issues 3+ times.
 
+---
+
+# Document Lifecycle
+
+**MANDATORY**: Load `document-lifecycle` skill. You **trigger closure** on commit.
+
+**After successful commit** (Stage 1 completion):
+1. Update Status to "Committed" on: plan, implementation, qa, uat docs for the committed plan
+2. Move all to their respective `closed/` folders:
+   - `agent-output/planning/closed/`
+   - `agent-output/implementation/closed/`
+   - `agent-output/qa/closed/`
+   - `agent-output/uat/closed/`
+3. Log: "Closed documents for Plan [ID]: planning, implementation, qa, uat moved to closed/"
+
+**Self-check on start**: Before starting work, scan `agent-output/deployment/` for docs with terminal Status outside `closed/`. Move them to `closed/` first.
+
+**Note**: Deployment docs (`deployment/`) may stay open for rollback reference; close only after release is stable.
+
+---
+
 # Memory Contract
 
 **MANDATORY**: Load `memory-contract` skill at session start. Memory is core to your reasoning.
@@ -167,3 +192,4 @@ Escalation:
 - Store: `#flowbabyStoreSummary { "topic": "3-7 words", "context": "what/why", "decisions": [...] }`
 
 Full contract details: `memory-contract` skill
+

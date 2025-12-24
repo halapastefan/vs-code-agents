@@ -217,6 +217,44 @@ Agents update status when:
 - **Critic/QA/UAT**: Updates to "Approved" or "Blocked" after review
 - **DevOps**: Updates to "Released" after successful release
 
+### Document Lifecycle and Closure
+
+Completed documents move to `closed/` subfolders to keep active work visible:
+
+```text
+agent-output/
+├── planning/
+│   ├── 085-active-feature.md      ← currently active
+│   └── closed/
+│       ├── 080-completed.md       ← archived after commit
+│       └── 081-completed.md
+├── qa/
+│   └── closed/
+└── ...
+```
+
+**Key concepts:**
+
+| Concept | Description |
+|---------|-------------|
+| **Unified numbering** | All documents in a work chain share the same ID (analysis 080 → plan 080 → qa 080) |
+| **`.next-id` file** | Global counter at `agent-output/.next-id`, incremented by originating agents |
+| **Terminal statuses** | `Committed`, `Released`, `Abandoned`, `Deferred`, `Superseded` trigger closure |
+| **Closure trigger** | DevOps moves docs to `closed/` after successful commit |
+| **Orphan detection** | Agents self-check on start; Roadmap runs periodic sweep |
+
+**Document header format:**
+```yaml
+---
+ID: 080
+Origin: 080
+UUID: a3f7c2b1
+Status: Active
+---
+```
+
+See `document-lifecycle` skill for full details.
+
 ### Open Question Gate
 
 Plans may contain `OPEN QUESTION` items that require resolution before implementation.

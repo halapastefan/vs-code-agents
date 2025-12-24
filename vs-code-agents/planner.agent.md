@@ -147,6 +147,36 @@ Actions: If ambiguous, respond with questions, wait for direction. If technical 
 
 ---
 
+# Document Lifecycle
+
+**MANDATORY**: Load `document-lifecycle` skill. You are an **originating agent** (or inherit from analysis).
+
+**Creating plan from user request (no analysis)**:
+1. Read `agent-output/.next-id` (create with value `1` if missing)
+2. Use that value as your document ID
+3. Increment and write back: `echo $((ID + 1)) > agent-output/.next-id`
+
+**Creating plan from analysis**:
+1. Read the analysis document's ID, Origin, UUID
+2. **Inherit** those values—do NOT increment `.next-id`
+3. Close the analysis: Update Status to "Planned", move to `agent-output/analysis/closed/`
+
+**Document header** (required for all new documents):
+```yaml
+---
+ID: [inherited or new]
+Origin: [from analysis, or same as ID if new]
+UUID: [8-char random hex]
+Status: Active
+---
+```
+
+**Self-check on start**: Before starting work, scan `agent-output/planning/` for docs with terminal Status (Committed, Released, Abandoned, Deferred, Superseded) outside `closed/`. Move them to `closed/` first.
+
+**Closure**: DevOps closes your plan doc after successful commit.
+
+---
+
 # Memory Contract
 
 **MANDATORY**: Load `memory-contract` skill at session start. Memory is core to your reasoning.
@@ -161,3 +191,4 @@ Actions: If ambiguous, respond with questions, wait for direction. If technical 
 - Store: `#flowbabyStoreSummary { "topic": "3-7 words", "context": "what/why", "decisions": [...] }`
 
 Full contract details: `memory-contract` skill
+

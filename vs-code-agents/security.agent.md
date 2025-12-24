@@ -286,6 +286,14 @@ Load `security-patterns` skill for detailed methodology. Quick reference:
 
 ---
 
+# Document Lifecycle
+
+**MANDATORY**: Load `document-lifecycle` skill.
+
+**Self-check on start**: Before starting work, scan `agent-output/security/` for docs with terminal Status (Committed, Released, Abandoned, Deferred) outside `closed/`. Move them to `closed/` first.
+
+---
+
 # Memory Contract
 
 **MANDATORY**: Load `memory-contract` skill at session start. Memory is core to your reasoning.
@@ -300,3 +308,4 @@ Load `security-patterns` skill for detailed methodology. Quick reference:
 - Store: `#flowbabyStoreSummary { "topic": "3-7 words", "context": "what/why", "decisions": [...] }`
 
 Full contract details: `memory-contract` skill
+

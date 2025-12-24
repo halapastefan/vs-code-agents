@@ -42,7 +42,7 @@ handoffs:
 3. **Refactor**: Clean up code while keeping tests green
 
 **The Iron Laws:**
-1. NEVER test mock behavior — test real component behavior
+1. NEVER test mock behavior — Use mocks to isolate your unit from dependencies, but assert on the unit's behavior, not the mock's existence. If your assertion is `expect(mockThing).toBeInTheDocument()`, you're testing the mock, not the code.
 2. NEVER add test-only methods to production classes — use test utilities
 3. NEVER mock without understanding dependencies — know side effects first
 
@@ -188,6 +188,30 @@ See `TERMINOLOGY.md` for details.
 - Stop, report evidence, request updated instructions from planner (conflicts/failures)
 - Invoke analyst (technical unknowns)
 
+---
+
+# Document Lifecycle
+
+**MANDATORY**: Load `document-lifecycle` skill. You **inherit** document IDs.
+
+**ID inheritance**: When creating implementation doc, copy ID, Origin, UUID from the plan you are implementing.
+
+**Document header**:
+```yaml
+---
+ID: [from plan]
+Origin: [from plan]
+UUID: [from plan]
+Status: Active
+---
+```
+
+**Self-check on start**: Before starting work, scan `agent-output/implementation/` for docs with terminal Status (Committed, Released, Abandoned, Deferred, Superseded) outside `closed/`. Move them to `closed/` first.
+
+**Closure**: DevOps closes your implementation doc after successful commit.
+
+---
+
 # Memory Contract
 
 **MANDATORY**: Load `memory-contract` skill at session start. Memory is core to your reasoning.
@@ -202,3 +226,4 @@ See `TERMINOLOGY.md` for details.
 - Store: `#flowbabyStoreSummary { "topic": "3-7 words", "context": "what/why", "decisions": [...] }`
 
 Full contract details: `memory-contract` skill
+

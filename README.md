@@ -264,6 +264,7 @@ Agents now use **Claude Skills**—modular, reusable instruction sets that load 
 | `memory-contract` | Unified Flowbaby memory retrieval/storage contract |
 | `architecture-patterns` | ADR templates, patterns, anti-pattern detection |
 | `code-review-checklist` | Pre/post-implementation review criteria |
+| `document-lifecycle` | Unified numbering, automated closure, orphan detection |
 | `engineering-standards` | SOLID, DRY, YAGNI, KISS with detection patterns |
 | `release-procedures` | Two-stage release workflow, semver, platform constraints |
 | `security-patterns` | OWASP Top 10, language-specific vulnerabilities |
@@ -284,6 +285,16 @@ Agents now use **Claude Skills**—modular, reusable instruction sets that load 
 - **Open Question Gate**: Implementer halts if plans have unresolved questions; requires explicit user acknowledgment to proceed
 - **Memory as skill**: Memory contract moved from inline in each agent to a loadable `memory-contract` skill
 - **Slimmed Security agent**: Reduced by 46% using skill references instead of inline content
+
+### Document Lifecycle System (2025-12-24)
+
+New `document-lifecycle` skill implementing:
+
+- **Unified numbering**: All documents in a work chain share the same ID (analysis 080 → plan 080 → qa 080 → uat 080)
+- **Automated closure**: Documents move to `closed/` subfolders after commit
+- **Orphan detection**: Agents self-check + Roadmap periodic sweep
+
+This keeps active plans visible while archiving completed work for traceability.
 
 ### Previous Updates
 

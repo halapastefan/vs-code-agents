@@ -172,6 +172,30 @@ Part of structured workflow: planner → analyst → critic → architect → im
 - PLAN-LEVEL: Significant drift from objective
 - PATTERN: Objective drift recurring 3+ times
 
+---
+
+# Document Lifecycle
+
+**MANDATORY**: Load `document-lifecycle` skill. You **inherit** document IDs.
+
+**ID inheritance**: When creating UAT doc, copy ID, Origin, UUID from the plan you are validating.
+
+**Document header**:
+```yaml
+---
+ID: [from plan]
+Origin: [from plan]
+UUID: [from plan]
+Status: Active
+---
+```
+
+**Self-check on start**: Before starting work, scan `agent-output/uat/` for docs with terminal Status (Committed, Released, Abandoned, Deferred, Superseded) outside `closed/`. Move them to `closed/` first.
+
+**Closure**: DevOps closes your UAT doc after successful commit.
+
+---
+
 # Memory Contract
 
 **MANDATORY**: Load `memory-contract` skill at session start. Memory is core to your reasoning.
@@ -186,3 +210,4 @@ Part of structured workflow: planner → analyst → critic → architect → im
 - Store: `#flowbabyStoreSummary { "topic": "3-7 words", "context": "what/why", "decisions": [...] }`
 
 Full contract details: `memory-contract` skill
+
