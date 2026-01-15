@@ -113,6 +113,7 @@ copilot --agent planner --prompt "Create a plan for adding user authentication"
 |----------|---------|
 | [USING-AGENTS.md](USING-AGENTS.md) | Quick start guide (5 min read) |
 | [AGENTS-DEEP-DIVE.md](AGENTS-DEEP-DIVE.md) | Comprehensive documentation |
+| [CHANGELOG.md](CHANGELOG.md) | Notable repository changes |
 | [memory-contract-example.md](vs-code-agents/memory-contract-example.md) | Memory usage patterns |
 
 ---
@@ -173,6 +174,7 @@ The persistent memory layer that powers the Flowbaby Agent Team.
 
 ```text
 agents/
+├── CHANGELOG.md                 # Notable changes
 ├── README.md                    # This file
 ├── USING-AGENTS.md              # Quick start guide
 ├── AGENTS-DEEP-DIVE.md          # Comprehensive documentation
@@ -243,6 +245,15 @@ Edit `.agent.md` files to adjust:
 ## Recent Updates
 
 Recent commits introduced significant improvements to agent workflow and capabilities:
+
+### Uncertainty-Aware Issue Analysis (2026-01-15)
+
+Agents now explicitly avoid forced root-cause narratives when evidence is missing.
+
+- **Analyst**: Uses an objective hard pivot trigger (timebox/evidence gate) to switch from RCA attempts to system hardening + telemetry requirements.
+- **Architect**: Treats insufficient observability as an architectural risk; defines normal vs debug logging guidance and a minimum viable incident telemetry baseline.
+- **QA**: Validates diagnosability improvements; prefers asserting structured telemetry fields/events over brittle log string matching.
+- **Template**: `vs-code-agents/reference/uncertainty-review-template.md` provides a repeatable output format.
 
 ### Skills System (2025-12-19)
 

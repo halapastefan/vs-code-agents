@@ -137,6 +137,9 @@ agent-output/
 2. Select **Analyst** → investigates → `agent-output/analysis/002-jwt-vs-sessions.md`
 3. Findings go back to Planner to inform the plan
 
+**Incident/bug variant (when evidence is incomplete)**:
+- If logs/telemetry are insufficient to prove a single root cause, Analyst switches to an uncertainty-aware format: label Verified vs Hypothesis, then pivot to system weaknesses + required telemetry. A reusable template exists at `vs-code-agents/reference/uncertainty-review-template.md`.
+
 ### Pattern 4: The Security Gate
 
 ```text
@@ -489,6 +492,14 @@ Plans do NOT contain:
 - Analyze root causes
 - Document findings with evidence
 
+**Uncertainty-aware investigation (incident/bug work)**:
+- If a root cause cannot be proven with available evidence, Analyst must NOT force a narrative.
+- Analyst uses an objective hard pivot trigger (timebox/evidence gate) to stop digging and pivot to:
+  - Weaknesses in architecture/code/process that could allow the observed behavior
+  - Observability gaps: the minimal telemetry needed to isolate the issue next time
+- Telemetry is classified as **normal** vs **debug** (always-on actionable signals vs opt-in verbose signals).
+- Recommended output format: `vs-code-agents/reference/uncertainty-review-template.md`.
+
 **Key Constraint**: **Investigates but doesn't fix**. Produces analysis docs, not code changes.
 
 **When to invoke**:
@@ -512,6 +523,10 @@ Plans do NOT contain:
 - Define patterns and boundaries
 - Review plans for architectural fit
 - Guide cross-cutting concerns
+
+**Observability is architecture (incident/bug work)**:
+- When RCA is uncertain, Architect treats insufficient telemetry as an architectural risk.
+- Architect requires explicit normal-vs-debug guidance and recommends a minimum viable incident telemetry baseline (correlation IDs, state transitions, dependency boundary signals, error taxonomy).
 
 **Key Constraint**: **Defines WHERE things live, not exact implementation**.
 
@@ -603,6 +618,10 @@ The Security Agent has been significantly enhanced to provide truly objective, c
 - Verify test coverage
 - Execute tests
 - Identify gaps
+
+**Diagnosability as a QA concern (incident/bug work)**:
+- If a root cause cannot be proven, QA expects changes to improve diagnosability (telemetry markers, correlation IDs, structured context).
+- QA prefers validating telemetry via structured fields/events over brittle log string matching.
 
 **Key Constraint**: **Technical quality, not business value** (that's UAT).
 

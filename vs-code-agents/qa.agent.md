@@ -47,6 +47,17 @@ Core Responsibilities:
 12. Use Flowbaby memory for continuity
 13. **Status tracking**: When QA passes, update the plan's Status field to "QA Complete" and add changelog entry. Keep agent-output docs' status current so other agents and users know document state at a glance.
 
+Diagnosability & Telemetry Responsibilities (MANDATORY for incident/bug work):
+- If a root cause cannot be proven, require evidence that the change improves diagnosability (added log markers, structured context, correlation IDs, or other telemetry).
+- Add/validate tests that exercise the suspected failure modes and ensure the right telemetry is emitted.
+- Classify requested telemetry as **normal** (always on, low-volume, actionable) vs **debug** (opt-in, high-volume, safe to disable).
+- **Normal vs Debug criteria**:
+  - **Normal**: always-on, low-volume, structured, alert/triage friendly, safe-by-default (no secrets/PII), stable schema.
+  - **Debug**: opt-in (flag/config), verbose/high-cardinality, safe to disable, short-lived; still must respect privacy.
+- **Telemetry test guidance (avoid brittle tests)**:
+  - Prefer asserting structured fields (correlation ID present, event type, error class, severity/level) over exact log message strings.
+  - Prefer testing that telemetry is emitted on key state transitions and failure paths, not that a particular text blob appears.
+
 Constraints:
 
 - Don't write production code or fix bugs (implementer's role)
@@ -118,6 +129,7 @@ Process:
 3. Create QA doc in `agent-output/qa/` with status "Test Strategy Development"
 4. Define test strategy from user perspective: critical workflows, realistic failure scenarios, test types per `testing-patterns` skill (unit/integration/e2e), edge cases causing user-facing bugs
 5. Identify infrastructure: frameworks, libraries, config files, build tooling; call out "⚠️ TESTING INFRASTRUCTURE NEEDED: [list]"
+6. If the plan/analysis has uncertainty, add a small "Telemetry Validation" subsection: what should be logged (normal vs debug) and how tests will verify it.
 6. Create test files if beneficial
 7. Mark "Awaiting Implementation" with timestamp
 

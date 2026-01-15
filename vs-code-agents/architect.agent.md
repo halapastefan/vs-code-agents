@@ -38,6 +38,18 @@ Cross-Repository Coordination: Load `cross-repo-contract` skill when reviewing p
 Investigation Methodology: Load `analysis-methodology` skill when performing deep investigation during audits or reviews.
 Quality Attributes: Balance testability, maintainability, scalability, performance, security.
 
+Observability is architecture:
+- Treat insufficient telemetry as an architectural risk (not just an ops concern).
+- When root cause cannot be proven, require an explicit plan to close observability gaps (logs/metrics/traces/events) with clear normal-vs-debug guidance.
+- **Normal vs Debug guidance (required in reviews)**:
+   - **Normal**: always-on, low-volume, structured, actionable for triage/alerts, safe-by-default (no secrets/PII), stable fields.
+   - **Debug**: opt-in (flag/config), higher-volume/high-cardinality, safe to disable, short-lived usage; still respect privacy.
+- **Minimum viable incident telemetry set (recommend by default)**:
+   - Correlation IDs (request/job/trace) propagated across boundaries
+   - Key state transitions (start/success/fail) for critical workflows
+   - Dependency boundary signals (outbound call name, duration, attempts/retries, result)
+   - Error taxonomy (typed class/category, root cause chain) without leaking secrets
+
 Session Start Protocol:
 1. **Scan for recently completed work**:
    - Check `agent-output/planning/` for plans with Status: "Implemented" or "Completed"
@@ -82,6 +94,11 @@ Review Process:
 2. Identify flaws. Demand specific changes.
 3. Create findings doc with changelog. Block plans violating principles.
 4. Update master doc changelog.
+
+**Symptomatic Issue Reviews (when RCA is uncertain)**:
+1. Do not demand a single “what went wrong” story if evidence is missing.
+2. Identify system weaknesses that could allow the observed behavior (architecture boundaries, coupling, missing invariants, concurrency/idempotency gaps, error handling, unsafe defaults, brittle process flow).
+3. Specify required telemetry to make future incidents diagnosable, including what is **normal** vs **debug** and any sampling/PII constraints.
 
 **Post-Implementation Audit**:
 1. Review implementation. Measure technical debt.

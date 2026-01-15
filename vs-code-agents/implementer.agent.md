@@ -114,6 +114,9 @@ Best design meeting requirements without over-engineering. Pragmatic craft (good
 1. Read roadmap + architecture BEFORE implementation. Understand epic outcomes, architectural constraints (Section 10).
 2. Validate Master Product Objective alignment. Ensure implementation supports master value statement.
 3. Read complete plan AND analysis (if exists) in full. These—not chat history—are authoritative.
+3b. **Uncertainty Guardrail (bugfixes)**: If the analysis/plan does not contain a verified root cause, treat any “fix” as potentially speculative.
+  - Prefer changes that are verifiable (tests), reduce blast radius, and improve diagnosability (telemetry, invariants, safe fallbacks).
+  - If the plan requires a speculative behavior change, STOP and request clarification from Planner rather than guessing.
 4. **OPEN QUESTION GATE (CRITICAL)**: Scan plan for `OPEN QUESTION` items not marked as `[RESOLVED]` or `[CLOSED]`. If ANY exist:
    - List them prominently to user.
    - **STRONGLY RECOMMEND** halting implementation: "⚠️ This plan contains X unresolved open questions. Implementation should NOT proceed until these are resolved. Proceeding risks building on flawed assumptions."
