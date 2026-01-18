@@ -8,7 +8,7 @@ This repo defines a set of `.agent.md` files that configure specialized AI perso
 
 A typical high-level workflow looks like:
 
-Roadmap → Planner → (Analyst, Architect, Critic, Security) → Implementer → QA → UAT → DevOps → Retrospective → ProcessImprovement
+Roadmap → Planner → (Analyst, Architect, Critic, Security) → Implementer → Code Reviewer → QA → UAT → DevOps → Retrospective → ProcessImprovement
 
 **All agents use Flowbaby memory** via the `memory-contract` skill to provide long-running context across sessions. Agents function without Flowbaby but greatly benefit from its cross-session context. Install the [Flowbaby VS Code extension](https://github.com/groupzer0/flowbaby) to enable memory functions. 
 
@@ -91,6 +91,7 @@ Agents can load **Skills**—modular, reusable instruction sets that provide spe
 | `analysis-methodology` | Confidence levels, gap tracking, investigation techniques |
 | `architecture-patterns` | ADR templates, patterns, anti-pattern detection |
 | `code-review-checklist` | Pre/post-implementation review criteria |
+| `code-review-standards` | Code review checklist, severity definitions, document templates |
 | `cross-repo-contract` | Multi-repo API type safety and contract coordination |
 | `document-lifecycle` | Unified numbering, automated closure, orphan detection |
 | `engineering-standards` | SOLID, DRY, YAGNI, KISS with detection patterns |
@@ -249,11 +250,31 @@ That's it! The agents handle the rest automatically.
 **Example handoff prompts**:
 - To Analyst: "I've encountered technical unknowns during implementation. Please investigate."
 - To Planner: "The plan has ambiguities or conflicts. Please clarify."
-- To QA: "Implementation is complete. Please verify test coverage and execute tests."
+- To Code Reviewer: "Implementation is complete. Please review code quality."
 
 **Tips**:
 - Provide the **plan file path** and any existing analysis/architecture links.
 - Expect the Implementer to: update code and tests, run tests, and produce an implementation doc—without editing QA/UAT docs directly.
+
+---
+
+### Code Reviewer – Code Quality Gate
+
+**Role**: Reviews code quality, architecture alignment, and maintainability before QA.
+
+**Use when**:
+- Implementation is complete and ready for quality review.
+- You want to catch design issues before QA invests testing time.
+
+**Example handoff prompts**:
+- To Implementer: "Code review found quality issues. Please address findings."
+- To Architect: "Implementation reveals architectural issues or deviates from design."
+- To QA: "Code review approved. Implementation ready for testing."
+
+**Tips**:
+- Code Reviewer can **reject on code quality alone**.
+- It checks: architecture alignment, SOLID/DRY/YAGNI/KISS, TDD compliance, documentation/comments, code smells.
+- Uses Architect's `system-architecture.md` as source of truth.
 
 ---
 
@@ -263,7 +284,7 @@ That's it! The agents handle the rest automatically.
 
 **Use when**:
 - You need a test plan before implementation.
-- Implementation is done and you want a thorough technical test pass.
+- Code review is complete and you want a thorough technical test pass.
 
 **Example handoff prompts**:
 - To Planner: "Testing infrastructure is missing or inadequate. Please update plan to include required test frameworks, libraries, and configuration."
@@ -272,7 +293,7 @@ That's it! The agents handle the rest automatically.
 
 **Tips**:
 - QA focuses on **tests, coverage, and technical risk**, not business value.
-- Use QA to design/execute tests and verify they’re meaningful, not just green.
+- Use QA to design/execute tests and verify they're meaningful, not just green.
 
 ---
 

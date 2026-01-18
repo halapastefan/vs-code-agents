@@ -41,6 +41,7 @@ A single general-purpose AI tries to do everything—plan, code, test, review—
 | **Quality** | Critic | Reviews, doesn't modify artifacts |
 | **Security** | Security | Findings, doesn't implement remediations |
 | **Implementation** | Implementer | Follows plans, doesn't redesign |
+| **Code Quality** | Code Reviewer | Quality gate before QA, can reject |
 | **Testing** | QA | Test strategy, not business value |
 | **Value** | UAT | Business value, not technical quality |
 | **Release** | DevOps | Requires explicit user approval |
@@ -102,12 +103,12 @@ agent-output/
 ### Pattern 2: The Implementation Loop
 
 ```text
-┌─────────────┐    ┌──────┐    ┌──────┐    ┌────────┐
-│ Implementer │───▶│  QA  │───▶│ UAT  │───▶│ DevOps │
-│   (code)    │    │(test)│    │(value)    │(release)│
-└─────────────┘    └──────┘    └──────┘    └────────┘
-       ▲               │           │
-       └───────────────┴───────────┘
+┌─────────────┐    ┌─────────────┐    ┌──────┐    ┌──────┐    ┌────────┐
+│ Implementer │───▶│ Code        │───▶│  QA  │───▶│ UAT  │───▶│ DevOps │
+│   (code)    │    │ Reviewer    │    │(test)│    │(value)│    │(release)│
+└─────────────┘    └─────────────┘    └──────┘    └──────┘    └────────┘
+       ▲               │               │           │
+       └───────────────┴───────────────┴───────────┘
               (fix issues)
 ```
 
@@ -115,11 +116,13 @@ agent-output/
 
 **Example flow**:
 1. Select **Implementer** → Implement plan → code changes + tests
-2. Select **QA** → Verify coverage → `agent-output/qa/001-auth-qa.md`
-3. If gaps: back to Implementer
-4. Select **UAT** → Validate value → `agent-output/uat/001-auth-uat.md`
+2. Select **Code Reviewer** → Verify code quality → `agent-output/code-review/001-auth-code-review.md`
+3. If quality issues: back to Implementer
+4. Select **QA** → Verify coverage → `agent-output/qa/001-auth-qa.md`
 5. If gaps: back to Implementer
-6. Select **DevOps** → Release → requires user approval
+6. Select **UAT** → Validate value → `agent-output/uat/001-auth-uat.md`
+7. If gaps: back to Implementer
+8. Select **DevOps** → Release → requires user approval
 
 ### Pattern 3: The Investigation Branch
 
@@ -609,6 +612,32 @@ The Security Agent has been significantly enhanced to provide truly objective, c
 
 ---
 
+### Code Reviewer Agent
+
+**Purpose**: Quality gate between implementation and QA.
+
+**Key Responsibilities**:
+- Review code for architecture alignment (uses Architect's docs as source of truth)
+- Check SOLID, DRY, YAGNI, KISS principles
+- Verify TDD compliance
+- Assess documentation and comments (explaining "why" not "what")
+- Identify code smells and anti-patterns
+- Quick security scan for obvious vulnerabilities
+
+**Key Constraint**: **Reviews but doesn't fix**. Can reject on code quality alone.
+
+**Authority**: CAN REJECT implementation before QA invests testing time.
+
+**Outputs**:
+- Code review docs in `agent-output/code-review/`
+
+**Verdicts**:
+- `APPROVED`: Code quality acceptable, proceed to QA
+- `APPROVED_WITH_COMMENTS`: Minor issues noted, proceed to QA
+- `REJECTED`: Quality issues require fixes before QA
+
+---
+
 ### QA Agent
 
 **Purpose**: Ensure technical quality through testing.
@@ -637,11 +666,12 @@ The Security Agent has been significantly enhanced to provide truly objective, c
 
 **Key Responsibilities**:
 - Read plan's value statement
+- Review Implementation, Code Review, and QA docs (document-based, not code inspection)
 - Verify implementation satisfies value statement
 - Assess from user perspective
 - Make release recommendation
 
-**Key Constraint**: **Value, not technical quality** (that's QA).
+**Key Constraint**: **Value, not technical quality** (that's QA). Quick sanity check when docs are present.
 
 **Verdicts**:
 - `APPROVED FOR RELEASE`: Value delivered
@@ -719,6 +749,7 @@ This means agents can have access to many skills without consuming context until
 | `analysis-methodology` | Investigation techniques | Confidence levels, gap tracking, POC guidance |
 | `architecture-patterns` | ADR templates, patterns, anti-patterns | Layered architecture, repository pattern, STRIDE |
 | `code-review-checklist` | Pre/post-implementation review criteria | Value statement assessment, security checklist |
+| `code-review-standards` | Code review checklist, severity definitions, templates | Review focus areas, finding format, document template |
 | `cross-repo-contract` | Multi-repo API type safety | Contract discovery, sync workflow, breaking change coordination |
 | `document-lifecycle` | Unified numbering, closure, orphan detection | ID inheritance, terminal statuses, closed/ folders |
 | `engineering-standards` | SOLID, DRY, YAGNI, KISS | Detection patterns, refactoring guidance |

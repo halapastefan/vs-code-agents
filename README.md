@@ -31,6 +31,7 @@ This repository provides **specialized AI agents** that each own a specific part
 | **Critic** | Plan quality review |
 | **Security** | Comprehensive security assessment |
 | **Implementer** | Code and tests |
+| **Code Reviewer** | Code quality gate before QA |
 | **QA** | Test strategy and verification |
 | **UAT** | Business value validation |
 | **DevOps** | Packaging and releases |
@@ -121,7 +122,7 @@ copilot --agent planner --prompt "Create a plan for adding user authentication"
 ### Typical Workflow
 
 ```text
-Roadmap → Planner → Analyst/Architect/Security/Critic → Implementer → QA → UAT → DevOps
+Roadmap → Planner → Analyst/Architect/Security/Critic → Implementer → Code Reviewer → QA → UAT → DevOps
 ```
 
 1. **Roadmap** defines what to build and why
@@ -131,9 +132,10 @@ Roadmap → Planner → Analyst/Architect/Security/Critic → Implementer → QA
 5. **Security** audits for vulnerabilities. Recommends best practices.
 6. **Critic** reviews plan quality
 7. **Implementer** writes code
-8. **QA** verifies tests. Ensures robust test coverage
-9. **UAT** confirms business value was delivered
-10. **DevOps** releases (with user approval)
+8. **Code Reviewer** verifies code quality
+9. **QA** verifies tests. Ensures robust test coverage
+10. **UAT** confirms business value was delivered
+11. **DevOps** releases (with user approval)
 
 ---
 
@@ -188,6 +190,7 @@ agents/
     ├── pi.agent.md              # ProcessImprovement
     ├── planner.agent.md
     ├── qa.agent.md
+    ├── code-reviewer.agent.md
     ├── retrospective.agent.md
     ├── roadmap.agent.md
     ├── security.agent.md
@@ -265,6 +268,7 @@ Agents now use **Claude Skills**—modular, reusable instruction sets that load 
 | `analysis-methodology` | Confidence levels, gap tracking, investigation techniques |
 | `architecture-patterns` | ADR templates, patterns, anti-pattern detection |
 | `code-review-checklist` | Pre/post-implementation review criteria |
+| `code-review-standards` | Code review checklist, severity definitions, document templates |
 | `cross-repo-contract` | Multi-repo API type safety and contract coordination |
 | `document-lifecycle` | Unified numbering, automated closure, orphan detection |
 | `engineering-standards` | SOLID, DRY, YAGNI, KISS with detection patterns |

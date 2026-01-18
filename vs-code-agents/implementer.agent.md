@@ -14,9 +14,9 @@ handoffs:
     agent: Planner
     prompt: The plan has ambiguities or conflicts. Please clarify.
     send: false
-  - label: Submit for QA
-    agent: QA
-    prompt: Implementation is complete. Please verify test coverage and execute tests.
+  - label: Submit for Code Review
+    agent: Code Reviewer
+    prompt: Implementation is complete. Please review code quality before QA.
     send: false
 ---
 
@@ -238,7 +238,7 @@ Required sections:
 - Report ambiguities to planner
 - Create implementation doc
 - QA validates first → fix if fails → UAT validates after QA passes
-- Sequential gates: QA → UAT
+- Sequential gates: Code Review → QA → UAT
 
 **Distinctions**: Implementer=execute/code; Planner=plans; Analyst=research; QA/UAT=validation.
 
