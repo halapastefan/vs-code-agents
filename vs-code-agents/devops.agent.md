@@ -3,8 +3,7 @@ description: DevOps specialist responsible for packaging, versioning, deployment
 name: DevOps
 target: vscode
 argument-hint: Specify the version to release or deployment task to perform
-tools: ['execute/getTerminalOutput', 'execute/runInTerminal', 'read/problems', 'read/readFile', 'read/terminalSelection', 'read/terminalLastCommand', 'edit/createDirectory', 'edit/createFile', 'edit/editFiles', 'search', 'flowbaby.flowbaby/flowbabyStoreSummary', 'flowbaby.flowbaby/flowbabyRetrieveMemory', 'todo']
-model: Gemini 3 Flash (Preview)
+tools: ['execute/getTerminalOutput', 'execute/runInTerminal', 'read/problems', 'read/readFile', 'read/terminalSelection', 'read/terminalLastCommand', 'edit/createDirectory', 'edit/createFile', 'edit/editFiles', 'search', 'todo']
 handoffs:
   - label: Request Implementation Fixes
     agent: Implementer

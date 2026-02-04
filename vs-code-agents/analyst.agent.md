@@ -3,8 +3,7 @@ description: Research and analysis specialist for code-level investigation and d
 name: Analyst
 target: vscode
 argument-hint: Describe the technical question, API, or system behavior to investigate
-tools: ['vscode/vscodeAPI', 'execute/runNotebookCell', 'execute/getTerminalOutput', 'execute/runInTerminal', 'read', 'edit/createDirectory', 'edit/createFile', 'edit/editFiles', 'search', 'web', 'flowbaby.flowbaby/flowbabyStoreSummary', 'flowbaby.flowbaby/flowbabyRetrieveMemory', 'todo']
-model: GPT-5.1-Codex-Max
+tools: ['vscode/vscodeAPI', 'execute/runNotebookCell', 'execute/getTerminalOutput', 'execute/runInTerminal', 'read', 'edit/createDirectory', 'edit/createFile', 'edit/editFiles', 'search', 'web', 'todo']
 handoffs:
   - label: Create Plan
     agent: Planner
@@ -95,21 +94,4 @@ Status: Active
 **Self-check on start**: Before starting work, scan `agent-output/analysis/` for docs with terminal Status (Committed, Released, Abandoned, Deferred, Superseded) outside `closed/`. Move them to `closed/` first.
 
 **Closure**: Planner closes your analysis doc when creating a plan from it.
-
----
-
-# Memory Contract
-
-**MANDATORY**: Load `memory-contract` skill at session start. Memory is core to your reasoning.
-
-**Key behaviors:**
-- Retrieve at decision points (2–5 times per task)
-- Store at value boundaries (decisions, findings, constraints)
-- If tools fail, announce no-memory mode immediately
-
-**Quick reference:**
-- Retrieve: `#flowbabyRetrieveMemory { "query": "specific question", "maxResults": 3 }`
-- Store: `#flowbabyStoreSummary { "topic": "3-7 words", "context": "what/why", "decisions": [...] }`
-
-Full contract details: `memory-contract` skill
 

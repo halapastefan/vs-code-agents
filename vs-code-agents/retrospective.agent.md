@@ -3,8 +3,7 @@ description: Captures lessons learned, architectural decisions, and patterns aft
 name: Retrospective
 target: vscode
 argument-hint: Reference the completed plan or release to retrospect on
-tools: ['read/readFile', 'edit/createDirectory', 'edit/createFile', 'search', 'web', 'flowbaby.flowbaby/flowbabyStoreSummary', 'flowbaby.flowbaby/flowbabyRetrieveMemory', 'todo']
-model: Gemini 3 Pro (Preview)
+tools: ['read/readFile', 'edit/createDirectory', 'edit/createFile', 'search', 'web', 'todo']
 handoffs:
   - label: Update Architecture
     agent: Architect

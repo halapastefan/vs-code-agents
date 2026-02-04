@@ -6,8 +6,6 @@
 
 ## What This Is
 
-The Flowbaby Agent Team is the **reference implementation** for Flowbaby’s persistent memory system.
-
 These agents are intentionally designed to take advantage of long-term, workspace-scoped memory. They demonstrate what agent workflows look like when memory is treated as infrastructure rather than chat history.
 
 ## The Problem
